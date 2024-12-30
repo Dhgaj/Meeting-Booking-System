@@ -2,8 +2,10 @@ name: Build and Release
 
 on:
   push:
-    tags:
-      - 'v*'
+    branches:
+      - main
+      - master
+  workflow_dispatch:
 
 jobs:
   build:
@@ -27,12 +29,8 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Create Release
-        uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
         with:
-          files: |
-            dist/*.exe
-            dist/latest.yml
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          name: windows-build
+          path: dist/
