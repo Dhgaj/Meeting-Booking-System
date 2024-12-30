@@ -12,9 +12,6 @@ function createWindow () {
 
   // 加载您的网站
   win.loadURL('https://sifanlian.me')
-
-  // 打开开发者工具（可选，发布时请注释掉）
-  // win.webContents.openDevTools()
 }
 
 app.whenReady().then(() => {
